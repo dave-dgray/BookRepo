@@ -13,10 +13,8 @@ public class BookLenderTest {
 
     private BookLender bookLender = new BookLender(new BookRepositoryStub());
 
-    @Test
+    @Test(expected = BookMissingPrefixException.class)
     public void retrieveBook_whenReferenceInvalid_returnsException() throws BookNotFoundException {
-        expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("Reference Is Missing Prefix");
         bookLender.retrieveBook("INVALID-TEXT");
     }
 
@@ -31,16 +29,14 @@ public class BookLenderTest {
         assertEquals("The Gruffalo",book.getTitle());
     }
 
+    @Test(expected = BookMissingPrefixException.class)
+    public void getBookSummary_whenReferenceInvalid_returnsException() throws BookNotFoundException {
+        bookLender.getBookSummary("INVALID-TEXT");
+    }
+
     @Test(expected = BookNotFoundException.class)
     public void getBookSummary_whenBookDoesntExist_throwsException() throws BookNotFoundException {
         bookLender.getBookSummary("BOOK-999");
-    }
-
-    @Test
-    public void getBookSummary_whenReferenceInvalid_returnsException() throws BookNotFoundException {
-        expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("Reference Is Missing Prefix");
-        bookLender.getBookSummary("INVALID-TEXT");
     }
 
     @Test

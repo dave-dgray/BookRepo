@@ -11,8 +11,10 @@ import java.util.Objects;
 
 public class BookLender implements BookService {
 
-    public static final int REVIEW_WORD_LIMIT = 9;
-    public static final String BOOK_REFERENCE_PREFIX = "BOOK-";
+    private static final int REVIEW_WORD_LIMIT = 9;
+    private static final String BOOK_REFERENCE_PREFIX = "BOOK-";
+    private static final String ELLIPSIS = "...";
+
     private BookRepository bookRepository;
 
     BookLender(BookRepository bookRepository){
@@ -54,7 +56,7 @@ public class BookLender implements BookService {
         StringBuilder stringBuilder = new StringBuilder();
         reviewInWords.forEach(word -> stringBuilder.append(word).append(" "));
         removeTrailingSpace(stringBuilder);
-        stringBuilder.append("...");
+        stringBuilder.append(ELLIPSIS);
         return stringBuilder.toString();
     }
 
