@@ -1,0 +1,8 @@
+out/production/main/com/sky/library/Book.class
+out/production/main/com/sky/library/BookMissingPrefixException.class
+out/production/main/com/sky/library/BookNotFoundException.class
+out/production/main/com/sky/library/BookRepository.class
+out/production/main/com/sky/library/BookRetriever.class
+out/production/main/com/sky/library/BookService.class
+out/test/test/com/sky/library/BookRepositoryStub.class
+out/test/test/com/sky/library/BookRetrieverTest.class
