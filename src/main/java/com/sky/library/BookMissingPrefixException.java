@@ -8,7 +8,7 @@ package com.sky.library;
 public class BookMissingPrefixException extends RuntimeException {
 
     BookMissingPrefixException(){
-        super("Reference Is Missing BOOK Prefix");
+        super("Reference Is Missing Prefix");
     }
 
 }

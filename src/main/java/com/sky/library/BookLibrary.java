@@ -5,7 +5,7 @@ package com.sky.library;
  * Please do not make your solution publicly available in any way e.g. post in forums or commit to GitHub.
  */
 
-public class BookStore implements BookRepository {
+public class BookLibrary implements BookRepository {
     @Override
     public Book retrieveBook(String reference) {
         return null;
