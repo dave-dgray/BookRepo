@@ -11,7 +11,8 @@ import java.util.Objects;
 
 public class BookLender implements BookService {
 
-    public static final int MAX_NUMBER_OF_WORDS = 9;
+    public static final int REVIEW_WORD_LIMIT = 9;
+    public static final String BOOK_REFERENCE_PREFIX = "BOOK-";
     private BookRepository bookRepository;
 
     BookLender(BookRepository bookRepository){
@@ -20,7 +21,7 @@ public class BookLender implements BookService {
 
     @Override
     public Book retrieveBook(String bookReference) throws BookNotFoundException {
-        if (!bookReference.startsWith("BOOK-")) {
+        if (!bookReference.startsWith(BOOK_REFERENCE_PREFIX)) {
             throw new BookMissingPrefixException();
         }
         Book book = bookRepository.retrieveBook(bookReference);
@@ -32,7 +33,7 @@ public class BookLender implements BookService {
 
     @Override
     public String getBookSummary(String bookReference) throws BookNotFoundException {
-        if (!bookReference.startsWith("BOOK-")) {
+        if (!bookReference.startsWith(BOOK_REFERENCE_PREFIX)) {
             throw new BookMissingPrefixException();
         }
         Book book = bookRepository.retrieveBook(bookReference);
@@ -41,17 +42,17 @@ public class BookLender implements BookService {
         }
         String review = book.getReview();
         List<String> reviewInWords = splitReviewIntoWords(review);
-        if (reviewInWords.size() > MAX_NUMBER_OF_WORDS) {
-            review = getAbbreviatedReview(reviewInWords.subList(0,MAX_NUMBER_OF_WORDS));
+        if (reviewInWords.size() > REVIEW_WORD_LIMIT) {
+            review = createAbbreviatedReview(reviewInWords.subList(0, REVIEW_WORD_LIMIT));
         }
         return "["+book.getReference()+"] " +
                 book.getTitle() + " - " +
                 review;
     }
 
-    private String getAbbreviatedReview(List<String> reviewAsWords) {
+    private String createAbbreviatedReview(List<String> reviewInWords) {
         StringBuilder stringBuilder = new StringBuilder();
-        reviewAsWords.forEach(word -> stringBuilder.append(word).append(" "));
+        reviewInWords.forEach(word -> stringBuilder.append(word).append(" "));
         removeTrailingSpace(stringBuilder);
         stringBuilder.append("...");
         return stringBuilder.toString();
