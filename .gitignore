@@ -6,3 +6,5 @@ out/production/main/com/sky/library/BookRetriever.class
 out/production/main/com/sky/library/BookService.class
 out/test/test/com/sky/library/BookRepositoryStub.class
 out/test/test/com/sky/library/BookRetrieverTest.class
+src/main/main.iml
+src/test/test.iml
